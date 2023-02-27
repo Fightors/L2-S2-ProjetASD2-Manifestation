@@ -2,6 +2,7 @@
 #define MANIF_HPP
 
 #include "cortege.hpp"
+#include <string>
 
 class Manif {
 
