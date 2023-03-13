@@ -8,14 +8,14 @@ struct Position{
 
 class Personne {
     private :
-        String name;
+        std::string name;
         int id;
         Position pos;
         static int current;
     
     public :
-        Personne(String s, Position p);
-        String getName()const;
+        Personne(std::string s, Position p);
+        std::string getName()const;
         int getId()const;
         Position getPos()const;
         int getX()const;

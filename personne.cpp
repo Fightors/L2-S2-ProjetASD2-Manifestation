@@ -1,16 +1,17 @@
 #include "personne.hpp"
 #include <string>
+using namespace std;
 
 int Personne::current = 1;
 
-Personne::Personne(String s, Position p){
+Personne::Personne(string s, Position p){
     this->name = s;
     this->pos = p;
     this->id= current;
     current += 1;
 }
 
-String Personne::getName()const{
+string Personne::getName()const{
     return this->name;
 }
 
@@ -30,10 +31,12 @@ int Personne::getY()const{
     return this->getPos().y;
 }
 
-~Personne(){
+/*
+Personne::~Personne(){
     this->name=NULL;
     this->id=NULL;
     this->pos.x=NULL;
     this->pos.y=NULL;
     this->pos=NULL;
 }
+*/
