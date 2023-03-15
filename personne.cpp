@@ -1,13 +1,9 @@
 #include "personne.hpp"
-#include <string>
 using namespace std;
 
 int Personne::current = 1;
 
-Personne::Personne(string s, Position p){
-    this->name = s;
-    this->pos = p;
-    this->id= current;
+Personne::Personne(string s, Position p) : name(s), id(current), pos(p){
     current += 1;
 }
 

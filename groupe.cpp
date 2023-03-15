@@ -1,7 +1,4 @@
 #include "groupe.hpp"
-#include "personne.cpp"
-#include "couleur.cpp"
-#include <string>
 #include <map>
 using namespace std;
 
@@ -39,8 +36,10 @@ void Groupe::insertionPers(Personne p){
 }
 
 void Groupe::extractionPremier(){
-    this->grp.erase(this->grp.begin());
-    this->leader = this->grp.at(this->grp.begin());
+    int key=this->grp.begin()->first;
+    this->grp.erase(key);
+    key=this->grp.begin()->first;
+    this->leader = this->grp[key];
 }
 
 void Groupe::extractionID(int id){
