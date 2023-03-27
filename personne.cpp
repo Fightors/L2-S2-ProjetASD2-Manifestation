@@ -27,12 +27,6 @@ int Personne::getY()const{
     return this->getPos().y;
 }
 
-/*
-Personne::~Personne(){
-    this->name=NULL;
-    this->id=NULL;
-    this->pos.x=NULL;
-    this->pos.y=NULL;
-    this->pos=NULL;
-}
-*/
+
+Personne::~Personne(){}
+

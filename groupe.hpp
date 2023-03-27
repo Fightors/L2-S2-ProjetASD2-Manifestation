@@ -4,7 +4,8 @@
 #include "personne.hpp"
 #include "couleur.hpp"
 #include <string>
-#include <map>
+#include <unordered_map>
+#include <list>
 
 
 class Groupe {
@@ -12,14 +13,15 @@ class Groupe {
         Personne leader;
         std::string grp_name;
         Couleur color;
-        std::map<int, Personne> grp;
+        std::unordered_map<int, Personne> grp;
+        std::list<Personne> queueAge;
 
     public :
         Groupe(Personne p, std::string n, Couleur c);
         Personne getLeader()const;
         std::string getGrp_Name()const;
         Couleur getColor()const;
-        std::map<int, Personne> getGrp()const;
+        std::unordered_map<int, Personne> getGrp()const;
         int getSize()const;
         Personne findPersId(int id);
 

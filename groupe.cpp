@@ -1,10 +1,11 @@
 #include "groupe.hpp"
-#include <map>
+#include <unordered_map>
+#include <list>
 using namespace std;
 
 
-Groupe::Groupe(Personne p, string n, Couleur c) : leader(p), grp_name(n), color(c), grp() {
-    this->grp[p.getId()] = p;
+Groupe::Groupe(Personne p, string n, Couleur c) : leader(p), grp_name(n), color(c), grp(), queueAge() {
+    this->grp.emplace(p.getId(), p);
 }
 
 Personne Groupe::getLeader()const{
@@ -19,7 +20,7 @@ Couleur Groupe::getColor()const{
     return this->color;
 }
 
-map<int, Personne> Groupe::getGrp()const{
+unordered_map<int, Personne> Groupe::getGrp()const{
     return this->grp;
 }
 
@@ -32,14 +33,15 @@ Personne Groupe::findPersId(int id){
 }
 
 void Groupe::insertionPers(Personne p){
-    this->grp[p.getId()]=p;
+    this->grp.emplace(p.getId(),p);
+    this->queueAge.push_front(p);
 }
 
 void Groupe::extractionPremier(){
-    int key=this->grp.begin()->first;
-    this->grp.erase(key);
-    key=this->grp.begin()->first;
-    this->leader = this->grp[key];
+    int cle = this->queueAge.back().getId();
+    this->queueAge.pop_back();
+    this->grp.erase(cle);
+    this->leader = this->queueAge.back();
 }
 
 void Groupe::extractionID(int id){
@@ -48,14 +50,8 @@ void Groupe::extractionID(int id){
     }
     else{
         this->grp.erase(id);
+        //this->queueAge
     }
 }
 
-/*
-~Groupe(){
-    this->grp_name = NULL;
-    this->leader = NULL;
-    this->color = NULL;
-    ~this->grp();
-}
-*/
+Groupe::~Groupe(){}
