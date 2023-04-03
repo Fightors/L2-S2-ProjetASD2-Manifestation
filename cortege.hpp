@@ -9,7 +9,7 @@ class Cortege {
         std::string name;
         std::vector<Groupe> procession;
 
-    public:
+    public :
         Cortege(std::string n);
         void insertionGrp(Groupe g);
         void suppressionGrp(std::string s);
