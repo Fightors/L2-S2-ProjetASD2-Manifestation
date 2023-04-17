@@ -15,16 +15,12 @@ int Personne::getId()const{
     return this->id;
 }
 
-Position Personne::getPos()const{
-    return this->pos;
-}
-
 int Personne::getX()const{
-    return this->getPos().x;
+    return this->pos.x;
 }
 
 int Personne::getY()const{
-    return this->getPos().y;
+    return this->pos.y;
 }
 
 

@@ -38,9 +38,10 @@ void lecture_fichier_prenoms(set<std::string>& ens)
    fin.close();
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 int main()
-{
+{/*
    // initialisation du générateur de nombres aléatoires
    srand(time(0));
 
@@ -57,6 +58,7 @@ int main()
    getline(fcor, sujet);
 
    // TODO : création d'un cortège
+   Cortege C = new Cortege("CGT");
 
    while (fcor >> line)
    {
@@ -72,8 +74,32 @@ int main()
       // appeler choisir_prenom(ens_prenom) pour choisir un prénom
    }
    fcor.close();
+*/
 
    // TODO
+   Position pos1;
+   pos1.x=5;
+   pos1.y=7;
+
+   Personne P1 = {"jean",pos1};
+   Personne P2 = {"blob",pos1};
+
+   Couleur C1= Couleur::ROUGE;
+   Couleur C2= Couleur::JAUNE;
+
+   Groupe G1 = {P1,"CGT",C1};
+   G1.insertionPers(P2);
+
+   cout << G1.findPersId(2).getName() << endl;;
+
+   cout << G1.getLeader().getName() << endl;
+   cout << G1.getGrp_Name() << endl;;
+   cout << G1.getColor().nom() << endl;;
+   G1.extractionID(2);
+
+   cout << G1.getSize() << endl;
+
+   cout << G1.getLeader().getName() << endl;
 
    return 0;
 }

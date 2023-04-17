@@ -6,6 +6,7 @@ using namespace std;
 
 Groupe::Groupe(Personne p, string n, Couleur c) : leader(p), grp_name(n), color(c), grp(), queueAge() {
     this->grp.emplace(p.getId(), p);
+    this->queueAge.push_front(p);
 }
 
 Personne Groupe::getLeader()const{
@@ -39,9 +40,9 @@ void Groupe::insertionPers(Personne p){
 
 void Groupe::extractionPremier(){
     int cle = this->queueAge.back().getId();
-    this->queueAge.pop_back();
     this->grp.erase(cle);
-    this->leader = this->queueAge.back();
+    this->queueAge.pop_back();
+    this->leader = this->queueAge.back();  
 }
 
 void Groupe::extractionID(int id){
@@ -50,7 +51,7 @@ void Groupe::extractionID(int id){
     }
     else{
         this->grp.erase(id);
-        //this->queueAge
+        
     }
 }
 
