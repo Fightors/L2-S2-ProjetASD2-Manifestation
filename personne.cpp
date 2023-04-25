@@ -3,8 +3,16 @@ using namespace std;
 
 int Personne::current = 1;
 
-Personne::Personne(string s, Position p) : name(s), id(current), pos(p){
+Personne::Personne(string s, Position p) : name(s), id(current), pos(p), isLeader(false){
     current += 1;
+}
+
+bool Personne::getIsLeader()const{
+    return this->isLeader;
+}
+
+void Personne::setIsLeader(bool b){
+    this->isLeader=b;
 }
 
 string Personne::getName()const{

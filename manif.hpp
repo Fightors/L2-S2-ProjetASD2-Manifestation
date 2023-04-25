@@ -6,13 +6,18 @@
 
 class Manif {
     private :
-        Cortege march;
+        Cortege* march;
+        std::list<Personne> road;
+        int largeur;
+        int longueur;
         
     public :
-        Manif(Cortege c);
+        Manif(Cortege c, int x, int y);
         Personne findPersId(int id);
         std::list<Personne> getLeadersMarching();
-        
+        int getLongueur();
+        int getLargeur();
+
         void simStep();
         void extractionID(int id);
         void endTest();

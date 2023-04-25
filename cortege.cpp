@@ -1,5 +1,6 @@
 #include "cortege.hpp"
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 Cortege::Cortege(string n): name(n), procession(){}
@@ -38,23 +39,17 @@ void Cortege::suppressionPersId(int id){
     }
 }
 
-void Cortege::sortColor(){
-    //vector<string> ordre_couleur=("noir","rouge","vert","jaune","bleu","magenta","cyan","blanc");
-    //sort(this->procession.begin(), this->procession.end(), [&](const string& a, const string& b))
-
+void Cortege::sortColor() {
+    std::sort(procession.begin(), procession.end(),[](const Groupe& g1, const Groupe& g2) {
+        return g1.getColor().nom() < g2.getColor().nom();
+    });
 }
 
-void Cortege::sortSize(){
-    Groupe k = this->procession[0];
-    for (unsigned j = 0 ; j<this->procession.size() ; j++){
-            for (unsigned i=0 ; i<this->procession.size()-1 ; i++){
-                if (this->procession[i].getSize() > this->procession[i+1].getSize()){
-                    k = this->procession[i];
-                    this->procession[i] = this->procession[i+1] ;
-                    this->procession[i+1] = k ;
-                }
-            }
-        }
+void Cortege::sortSize() {
+    std::sort(procession.begin(), procession.end(),[](const Groupe& g1, const Groupe& g2) {
+        return g1.getSize() < g2.getSize();
+    });
 }
+
 
 Cortege::~Cortege(){}

@@ -11,6 +11,7 @@ class Personne {
         std::string name;
         int id;
         Position pos;
+        bool isLeader;
         static int current;
     
     public :
@@ -20,6 +21,8 @@ class Personne {
         Position getPos()const;
         int getX()const;
         int getY()const;
+        void setIsLeader(bool b);
+        bool getIsLeader()const;
         ~Personne();
 };
 
