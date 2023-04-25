@@ -4,7 +4,7 @@
 Manif::Manif(Cortege c): march(c){}
 
 Personne Manif::findPersId(int id){
-
+    
 }
 
 std::list<Personne> Manif::getLeadersMarching(){

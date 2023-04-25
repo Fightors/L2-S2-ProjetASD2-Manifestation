@@ -89,17 +89,13 @@ int main()
 
    Groupe G1 = {P1,"CGT",C1};
    G1.insertionPers(P2);
-
-   cout << G1.findPersId(2).getName() << endl;;
-
-   cout << G1.getLeader().getName() << endl;
-   cout << G1.getGrp_Name() << endl;;
-   cout << G1.getColor().nom() << endl;;
    G1.extractionID(2);
 
-   cout << G1.getSize() << endl;
-
-   cout << G1.getLeader().getName() << endl;
-
+   Cortege CORT = {"OH"};
+   cout << CORT.getName() << endl;
+   CORT.insertionGrp(G1);
+   cout << CORT.accesPersId(1).getId() << endl;
+   CORT.suppressionPersId(1);
+   CORT.suppressionGrp("CGT");
    return 0;
 }

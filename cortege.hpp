@@ -11,6 +11,7 @@ class Cortege {
 
     public :
         Cortege(std::string n);
+        std::string getName();
         void insertionGrp(Groupe g);
         void suppressionGrp(std::string s);
         Personne accesPersId(int id);

@@ -4,6 +4,10 @@ using namespace std;
 
 Cortege::Cortege(string n): name(n), procession(){}
 
+string Cortege::getName(){
+    return this->name;
+} 
+
 void Cortege::insertionGrp(Groupe g){
     this->procession.push_back(g);
 }

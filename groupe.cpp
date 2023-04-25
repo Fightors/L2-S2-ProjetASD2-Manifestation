@@ -51,7 +51,15 @@ void Groupe::extractionID(int id){
     }
     else{
         this->grp.erase(id);
-        
+        auto it = this->queueAge.begin();
+        while (it != this->queueAge.end()) {
+            if (it->getId() == id) {
+                it = this->queueAge.erase(it);
+            } 
+            else {
+                ++it;
+            }
+        }
     }
 }
 
