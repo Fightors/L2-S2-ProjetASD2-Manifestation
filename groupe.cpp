@@ -39,10 +39,12 @@ void Groupe::insertionPers(Personne p){
 }
 
 void Groupe::extractionPremier(){
+    this->leader.setIsLeader(false);
     int cle = this->queueAge.back().getId();
     this->grp.erase(cle);
     this->queueAge.pop_back();
-    this->leader = this->queueAge.back();  
+    this->leader = this->queueAge.back();
+    this->leader.setIsLeader(true); 
 }
 
 void Groupe::extractionID(int id){
