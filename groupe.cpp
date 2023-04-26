@@ -5,8 +5,8 @@ using namespace std;
 
 
 Groupe::Groupe(Personne p, string n, Couleur c) : leader(p), grp_name(n), color(c), grp(), queueAge() {
-    this->grp.emplace(p.getId(), p);
-    this->queueAge.push_front(p);
+    insertionPers(p);
+    p.setIsLeader(true);
 }
 
 Personne Groupe::getLeader()const{

@@ -59,12 +59,14 @@ int main()
 
    // TODO : création d'un cortège
    Cortege Cort ={"CGT"};
-   int larg;
-   int longu;
+   int larg = 5;
+   int longu = 7;
+   int step = 1;
 
-   cout << "Largeur et longueur de la grille de manifestations ?" << endl;
+   /*cout << "Largeur et longueur de la grille de manifestations ?" << endl;
    cin >> larg;
    cin >> longu;
+   */
 
    while (fcor >> line)
    {
@@ -74,11 +76,9 @@ int main()
       getline(is, str, ';');
       taille = stoi(str);
 
-      cout << str;
-
       Personne Leader ={choisir_prenom(ens_prenom),{0,0}}; 
       Couleur NewC = Couleur::creer(couleur);
-      Groupe NewG ={Leader, nom, NewC} ;
+      Groupe NewG ={Leader, nom, NewC};
       for(int i=0;i<taille-1;i++){
          Personne NewP ={choisir_prenom(ens_prenom),{0,0}};
          NewG.insertionPers(NewP); 
@@ -86,6 +86,12 @@ int main()
       Cort.insertionGrp(NewG);
    }
    fcor.close();
-   Manif fete ={Cort, larg, longu}; 
-   // TODO
+   Manif fete ={Cort, larg, longu};
+   cout << "OK" << endl;
+
+   while(fete.endTest()==false || step==1){
+      fete.simStep(step);
+      cout << "Etape :" << step << endl;
+      step+=1;
+   }  
 }

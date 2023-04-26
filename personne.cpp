@@ -27,8 +27,16 @@ int Personne::getX()const{
     return this->pos.x;
 }
 
+void Personne::setX(int x){
+    this->pos.x=x;
+}
+
 int Personne::getY()const{
     return this->pos.y;
+}
+
+void Personne::setY(int y){
+    this->pos.y=y;
 }
 
 

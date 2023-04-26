@@ -20,7 +20,9 @@ class Personne {
         int getId()const;
         Position getPos()const;
         int getX()const;
+        void setX(int x);
         int getY()const;
+        void setY(int y);
         void setIsLeader(bool b);
         bool getIsLeader()const;
         ~Personne();
