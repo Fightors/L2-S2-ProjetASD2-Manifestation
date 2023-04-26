@@ -41,7 +41,7 @@ void lecture_fichier_prenoms(set<std::string>& ens)
 
 ////////////////////////////////////////////////////////////////////////////////
 int main()
-{/*
+{
    // initialisation du générateur de nombres aléatoires
    srand(time(0));
 
@@ -58,7 +58,13 @@ int main()
    getline(fcor, sujet);
 
    // TODO : création d'un cortège
-   Cortege C = new Cortege("CGT");
+   Cortege Cort ={"CGT"};
+   int larg;
+   int longu;
+
+   cout << "Largeur et longueur de la grille de manifestations ?" << endl;
+   cin >> larg;
+   cin >> longu;
 
    while (fcor >> line)
    {
@@ -68,34 +74,18 @@ int main()
       getline(is, str, ';');
       taille = stoi(str);
 
-      cout << nom << ';' << couleur << ';' << taille << endl;
+      cout << str;
 
-      // TODO : création des groupes
-      // appeler choisir_prenom(ens_prenom) pour choisir un prénom
+      Personne Leader ={choisir_prenom(ens_prenom),{0,0}}; 
+      Couleur NewC = Couleur::creer(couleur);
+      Groupe NewG ={Leader, nom, NewC} ;
+      for(int i=0;i<taille-1;i++){
+         Personne NewP ={choisir_prenom(ens_prenom),{0,0}};
+         NewG.insertionPers(NewP); 
+      }
+      Cort.insertionGrp(NewG);
    }
    fcor.close();
-*/
-
+   Manif fete ={Cort, larg, longu}; 
    // TODO
-   Position pos1;
-   pos1.x=5;
-   pos1.y=7;
-
-   Personne P1 = {"jean",pos1};
-   Personne P2 = {"blob",pos1};
-
-   Couleur C1= Couleur::ROUGE;
-   Couleur C2= Couleur::JAUNE;
-
-   Groupe G1 = {P1,"CGT",C1};
-   G1.insertionPers(P2);
-   G1.extractionID(2);
-
-   Cortege CORT = {"OH"};
-   cout << CORT.getName() << endl;
-   CORT.insertionGrp(G1);
-   cout << CORT.accesPersId(1).getId() << endl;
-   CORT.suppressionPersId(1);
-   CORT.suppressionGrp("CGT");
-   return 0;
 }

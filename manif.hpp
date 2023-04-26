@@ -18,9 +18,9 @@ class Manif {
         int getLongueur();
         int getLargeur();
 
-        void simStep();
+        void simStep(int step);
         void extractionID(int id);
-        void endTest();
+        bool endTest();
         ~Manif();
 };
 

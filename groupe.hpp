@@ -24,6 +24,7 @@ class Groupe {
         std::unordered_map<int, Personne> getGrp()const;
         int getSize()const;
         Personne findPersId(int id);
+        std::list<Personne> getQueueAge()const;
 
         void insertionPers(Personne p);
         void extractionPremier();

@@ -9,6 +9,11 @@ string Cortege::getName(){
     return this->name;
 } 
 
+std::vector<Groupe> Cortege::getProcession(){
+    return this->procession;
+}
+
+
 void Cortege::insertionGrp(Groupe g){
     this->procession.push_back(g);
 }

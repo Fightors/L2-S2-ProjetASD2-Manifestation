@@ -26,8 +26,19 @@ std::list<Personne> Manif::getLeadersMarching() {
     return leaders;
 }
 
-void Manif::simStep(){
-
+void Manif::simStep(int step){
+    if(step<=int(this->march->getProcession().size())){
+        Groupe G = this->march->getProcession()[step];
+        for(std::list<Personne>::iterator it = G.getQueueAge().begin(); it != G.getQueueAge().end(); it++){
+            if(int(this->road.size())==this->largeur*this->longueur){
+                this->road.pop_back();
+            } 
+            this->road.push_front(*it);
+        }
+    }
+    else{
+        this->road.pop_back();
+    } 
 }
 
 void Manif::extractionID(int id){
@@ -43,8 +54,8 @@ void Manif::extractionID(int id){
     }
 }
 
-void Manif::endTest(){
-
+bool Manif::endTest(){
+    return this->road.size()==0;
 }
 
 Manif::~Manif(){}

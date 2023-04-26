@@ -13,6 +13,11 @@ Personne Groupe::getLeader()const{
     return this->leader;
 }
 
+std::list<Personne> Groupe::getQueueAge()const{
+    return this->queueAge;
+} 
+
+
 string Groupe::getGrp_Name()const{
     return this->grp_name;
 }

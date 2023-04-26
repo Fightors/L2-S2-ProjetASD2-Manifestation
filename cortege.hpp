@@ -12,6 +12,7 @@ class Cortege {
     public :
         Cortege(std::string n);
         std::string getName();
+        std::vector<Groupe> getProcession();
         void insertionGrp(Groupe g);
         void suppressionGrp(std::string s);
         Personne accesPersId(int id);
