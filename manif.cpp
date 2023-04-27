@@ -1,20 +1,31 @@
 #include "manif.hpp"
 #include <string>
 
+/// Constructeur de Manif
+/// @param c Le Cortège @param x largeur de la grille @param y longueur de la grille
 Manif::Manif(Cortege c, int x, int y) : march(&c), road(), largeur(x), longueur(y){}
 
+/// Getter pour la longueur de la grille
+/// @return int
 int Manif::getLongueur(){
     return this->longueur;
 }
 
+/// Getter pour la largeur de la grille
+/// @return int
 int Manif::getLargeur(){
     return this->largeur;
 }
 
+/// Trouve une Personne dans la manif à partir de l'id
+/// @param id l'id de la Personne
+/// @return Personne
 Personne Manif::findPersId(int id){
     return this->march->accesPersId(id);
 }
 
+/// Renvoie une liste de tous les leaders présents dans la manif actuellement
+/// @return std::list<Personne>
 std::list<Personne> Manif::getLeadersMarching() {
     std::list<Personne> leaders;
 
@@ -26,6 +37,8 @@ std::list<Personne> Manif::getLeadersMarching() {
     return leaders;
 }
 
+/// Simule une étape dans la progression de la manif
+/// @param step Le numéro de l'étape à simuler
 void Manif::simStep(int step){
     Position currentPos={1,1}; 
 
@@ -70,6 +83,9 @@ void Manif::simStep(int step){
     } 
 }
 
+
+/// Supprime une Personne de la Manif à partir de son id
+/// @param id L'id de la Personne
 void Manif::extractionID(int id){
     this->march->suppressionPersId(id);
     auto it = this->road.begin();
@@ -83,8 +99,11 @@ void Manif::extractionID(int id){
     }
 }
 
+/// Arrête la simulation quand la manif se finit
+/// @return bool
 bool Manif::endTest(){
     return this->road.size()==0;
 }
 
+/// Destructeur de Manif
 Manif::~Manif(){}
