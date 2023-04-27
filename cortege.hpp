@@ -19,6 +19,7 @@ class Cortege {
         void suppressionPersId(int id);
         void sortColor();
         void sortSize();
+        void afficherCortege();
         ~Cortege();
 };
 

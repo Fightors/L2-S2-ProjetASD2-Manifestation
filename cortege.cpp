@@ -72,5 +72,11 @@ void Cortege::sortSize() {
     });
 }
 
+void Cortege::afficherCortege(){
+    for(auto it = procession.begin(); it !=  procession.end(); it++){
+        it->afficherGroupe();
+    }
+}
+
 /// Destructeur de Cortège
 Cortege::~Cortege(){}

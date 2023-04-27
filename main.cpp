@@ -61,7 +61,9 @@ int main()
    Cortege Cort ={"CGT"};
    int larg = 5;
    int longu = 7;
-   int step = 1;
+   int step = 0;
+   int advanceGroupe = 0;
+   int advancePers = 0;
 
    /*cout << "Largeur et longueur de la grille de manifestations ?" << endl;
    cin >> larg;
@@ -87,11 +89,15 @@ int main()
    }
    fcor.close();
    Manif fete ={Cort, larg, longu};
-   cout << "OK" << endl;
-
-   while(fete.endTest()==false || step==1){
-      fete.simStep(step);
-      cout << "Etape :" << step << endl;
+   Cort.afficherCortege();
+   fete.afficherParticipants();
+   cout << "Etape : " << step << endl;
+   fete.afficherManif();
+   step+=1;
+   while(fete.endTest()==false || step == 1){
+      cout << "Etape : " << step << endl;
+      fete.simStep(step, advanceGroupe, advancePers);
+      fete.afficherManif();
       step+=1;
    }  
 }
