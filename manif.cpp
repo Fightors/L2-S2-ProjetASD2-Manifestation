@@ -129,4 +129,18 @@ void Manif::afficherParticipants() const {
 }
 
 /// Destructeur de Manif
-Manif::~Manif() {}
+Manif::~Manif() {
+    // Libérer chaque objet Personne stocké dans les tableaux
+    for (int i = 0; i < longueur; i++) {
+        for (int j = 0; j < largeur; j++) {
+            delete road[i][j];
+        }
+        delete[] road[i];
+    }
+    // Libérer le tableau de tableaux
+    delete[] road;
+
+    // Libérer les groupes du Cortège
+    delete march;
+}
+

@@ -4,6 +4,7 @@
 #include <sstream>
 #include <set>
 #include <time.h>
+#include <ctime>
 #include "manif.hpp"
 
 using namespace std;
@@ -57,11 +58,11 @@ int main()
    
    getline(fcor, sujet);
 
-   // TODO : création d'un cortège
    Cortege* Cort = new Cortege("CGT");
    int larg = 5;
    int longu = 7;
    int step = 0;
+   clock_t start , end;
 
    /*cout << "Largeur et longueur de la grille de manifestations ?" << endl;
    cin >> larg;
@@ -88,6 +89,7 @@ int main()
    fete->initRoad();
    fete->afficherParticipants();
    
+   start=clock();
    cout << "Etape : " << step << endl;
    fete->simStep(step);
    fete->afficherManif();
@@ -99,5 +101,8 @@ int main()
       step+=1;
    }
    cout << "Fin de manifestation !" << endl;
+   fete->~Manif();
+   end=clock();
+   cout << ( double ) ( end - start ) / CLOCKS_PER_SEC << " secondes . " << endl ;
    return 0;
 }
