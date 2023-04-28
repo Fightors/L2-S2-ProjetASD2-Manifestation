@@ -3,60 +3,74 @@
 
 /// Constructeur de Manif
 /// @param c Le Cortège @param x largeur de la grille @param y longueur de la grille
-Manif::Manif(Cortege c, int x, int y) : march(&c), road(), largeur(x), longueur(y){}
+Manif::Manif(Cortege* c, int x, int y) : march(c), road(), largeur(x), longueur(y){}
 
 /// Getter pour la longueur de la grille
 /// @return int
-int Manif::getLongueur(){
+int Manif::getLongueur()const{
     return this->longueur;
 }
 
 /// Getter pour la largeur de la grille
 /// @return int
-int Manif::getLargeur(){
+int Manif::getLargeur()const{
     return this->largeur;
 }
 
 /// Trouve une Personne dans la manif à partir de l'id
 /// @param id l'id de la Personne
-/// @return Personne
-Personne Manif::findPersId(int id){
+/// @return Personne*
+Personne* Manif::findPersId(int id)const{
     return this->march->accesPersId(id);
 }
 
 /// Renvoie une liste de tous les leaders présents dans la manif actuellement
-/// @return std::list<Personne>
-std::list<Personne> Manif::getLeadersMarching() {
+/// @return std::list<Personne*>
+std::list<Personne> Manif::getLeadersMarching()const{
     std::list<Personne> leaders;
 
-    for (Personne* p : road) {
-        if (p->getIsLeader()) {
-            leaders.push_back(*p);
+    for (int i=0; i<largeur;i++) {
+        for (int j=0; j<largeur;j++) {
+            if (road[i][j]->getIsLeader()) {
+                leaders.push_back(*road[i][j]);
+            }
         }
     }
     return leaders;
 }
 
+/// Initialise la route de manifestation
+void Manif::initRoad(){
+    road = new Personne**[largeur];
+    for (int i = 0; i < longueur; i++) {
+        road[i] = new Personne*[longueur];
+    }
+
+    for (int i = 0; i < longueur; i++) {
+        for (int j = 0; j < largeur; j++) {
+            road[i][j] = new Personne("-", {0, 0});
+        }
+    }
+}
+
+
 /// Simule une étape dans la progression de la manif
 /// @param step Le numéro de l'étape à simuler
-void Manif::simStep(int step, int Gr, int Per){
-    int temp = largeur;
-    while(temp>0){
-        std::vector<Groupe>::iterator it = this->march->getProcession().begin();
-        std::advance(it,Gr);
-        std::list<Personne>::iterator yt = (it->getQueueAge()).begin();
-        std::advance(yt,Per);
-        road.push_front(&(*yt));
-        temp--;
-        std::list<Personne>::iterator tempo = (it->getQueueAge()).begin();
-        std::advance(tempo,this->march->getProcession().size());
-        if(yt==tempo){
-            Gr+=1;
-            Per=0;
+void Manif::simStep(int step){
+    for (int i = longueur - 1; i > 0; i--) {
+        for (int j = 0; j < largeur; j++) {
+            if (road[i][j]->getName() != "-") {
+                road[i][j]->setY(road[i][j]->getY() + 1);
+            }
+            road[i][j] = road[i-1][j];
         }
-        else{
-            Per+=1;
-        }
+    }
+    
+    for(int i=1; i<=largeur;i++){
+        Personne* temP = this->march->accesPersId(largeur*step+i);
+        temP->setY(1);
+        temP->setX(i);
+        road[0][i-1] = temP;
     }
 }
 
@@ -64,33 +78,40 @@ void Manif::simStep(int step, int Gr, int Per){
 /// Supprime une Personne de la Manif à partir de son id
 /// @param id L'id de la Personne
 void Manif::extractionID(int id){
-    this->march->suppressionPersId(id);
-    auto it = this->road.begin();
-    while (it != this->road.end()) {
-        if ((*it)->getId() == id) {
-            it = this->road.erase(it);
-        } 
-        else {
-            ++it;
+    for (int i=0; i<largeur;i++) {
+        for (int j=0; j<largeur;j++) {
+            if (road[i][j]->getId()) {
+                road[i][j]=nullptr;
+            }
         }
     }
 }
 
 /// Arrête la simulation quand la manif se finit
 /// @return bool
-bool Manif::endTest(){
-    return this->road.size()==0;
+bool Manif::endTest()const{
+    for (int i=0; i<longueur;i++) {
+        for (int j=0; j<largeur;j++) {
+            if (road[i][j]->getName()!="-") {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
+
+/// Affiche la manifestation dasn son intégralité
 void Manif::afficherManif() const {
     for (int i = longueur - 1; i >= 0; --i) {
         std::cout << i + 1 << " ";
-        for (int j = 0; j < largeur; j++) {
-            auto tt = road.begin();
-            if ((*tt)!=nullptr ) { 
-                std::cout << (*tt)->getName()[0];
-            } else {
-                std::cout << "-"; 
+        for (int j = 0; j < largeur; ++j) {
+            if (road[i][j]->getName()!="-"){
+                Couleur C = this->march->getColorGrp(road[i][j]->getId());
+                C.afficher(std::cout,std::string(1,road[i][j]->getName()[0]));
+            }
+            else{
+                std::cout << road[i][j]->getName()[0];
             }
             std::cout << " ";
         }
@@ -108,4 +129,4 @@ void Manif::afficherParticipants() const {
 }
 
 /// Destructeur de Manif
-Manif::~Manif(){}
+Manif::~Manif() {}

@@ -7,21 +7,22 @@
 class Manif {
     private :
         Cortege* march;
-        std::list<Personne*> road;
+        Personne*** road;
         int largeur;
         int longueur;
         
     public :
-        Manif(Cortege c, int x, int y);
-        Personne findPersId(int id);
-        std::list<Personne> getLeadersMarching();
-        int getLongueur();
-        int getLargeur();
+        Manif(Cortege* c, int x, int y);
+        Personne* findPersId(int id)const;
+        std::list<Personne> getLeadersMarching()const;
+        int getLongueur()const;
+        int getLargeur()const;
 
+        void initRoad();
         void afficherParticipants() const;
-        void simStep(int step, int Gr, int Per);
+        void simStep(int step);
         void extractionID(int id);
-        bool endTest();
+        bool endTest()const;
         void afficherManif() const;
         ~Manif();
 };

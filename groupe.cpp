@@ -5,19 +5,19 @@ using namespace std;
 
 /// Constructeur de Groupe
 /// @param p La première Personne du Groupe @param n Nom du Groupe @param c Couleur du Groupe
-Groupe::Groupe(Personne p, string n, Couleur c) : leader(p), grp_name(n), color(c), grp(), queueAge() {
+Groupe::Groupe(Personne* p, string n, Couleur c) : leader(p), grp_name(n), color(c), grp(), queueAge() {
     insertionPers(p);
-    p.setIsLeader(true);
+    p->setIsLeader(true);
 }
 /// Getter du Leader du Groupe
-/// @return Personne
-Personne Groupe::getLeader()const{
+/// @return Personne*
+Personne* Groupe::getLeader()const{
     return this->leader;
 }
 
 /// Getter de la liste d'ancienneté du Groupe
-/// @return std::list<Personne>
-std::list<Personne> Groupe::getQueueAge()const{
+/// @return std::list<Personne*>
+std::list<Personne*> Groupe::getQueueAge()const{
     return this->queueAge;
 } 
 
@@ -47,40 +47,46 @@ int Groupe::getSize()const{
 
 /// Trouve une Personne dans le Groupe avec son id
 /// @param id
-/// @return Personne
-Personne Groupe::findPersId(int id){
-    return this->grp.at(id);
+/// @return Personne*
+Personne* Groupe::findPersId(int id){
+    Personne* res = new Personne("-",{0,0});
+    for(auto it = queueAge.begin(); it !=  queueAge.end(); it++){
+        if((*it)->getId()==id){
+            return (*it);
+        }
+    }
+    return res;
 }
 
 /// Insère une nouvelle Personne dans le Groupe
 /// @param p
-void Groupe::insertionPers(Personne p){
-    this->grp.emplace(p.getId(),p);
+void Groupe::insertionPers(Personne* p){
+    this->grp.emplace(p->getId(),*p);
     this->queueAge.push_front(p);
 }
 
 /// Retire le Leader actuel du Groupe
 /// Actualise le Groupe et la liste d'ancienneté
 void Groupe::extractionPremier(){
-    this->leader.setIsLeader(false);
-    int cle = this->queueAge.back().getId();
+    this->leader->setIsLeader(false);
+    int cle = this->queueAge.back()->getId();
     this->grp.erase(cle);
     this->queueAge.pop_back();
     this->leader = this->queueAge.back();
-    this->leader.setIsLeader(true); 
+    this->leader->setIsLeader(true); 
 }
 
 /// Extrait une personne avec son id
 /// @param id
 void Groupe::extractionID(int id){
-    if (id == this->leader.getId()){
+    if (id == this->leader->getId()){
         extractionPremier();
     }
     else{
         this->grp.erase(id);
         auto it = this->queueAge.begin();
         while (it != this->queueAge.end()) {
-            if (it->getId() == id) {
+            if ((*it)->getId() == id) {
                 it = this->queueAge.erase(it);
             } 
             else {
@@ -90,10 +96,11 @@ void Groupe::extractionID(int id){
     }
 }
 
-void Groupe::afficherGroupe(){
+/// Affiche l'intgralité d'un groupe
+void Groupe::afficherGroupe()const{
     cout << grp_name << endl;
     for(auto it = queueAge.begin(); it !=  queueAge.end(); it++){
-        cout << "Id : " << it->getId() << " Nom : " << it->getName() << endl;
+        cout << "Id : " << (*it)->getId() << " Nom : " << (*it)->getName() << endl;
     }
     cout << endl;
 }

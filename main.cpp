@@ -58,18 +58,15 @@ int main()
    getline(fcor, sujet);
 
    // TODO : création d'un cortège
-   Cortege Cort ={"CGT"};
+   Cortege* Cort = new Cortege("CGT");
    int larg = 5;
    int longu = 7;
    int step = 0;
-   int advanceGroupe = 0;
-   int advancePers = 0;
 
    /*cout << "Largeur et longueur de la grille de manifestations ?" << endl;
    cin >> larg;
    cin >> longu;
    */
-
    while (fcor >> line)
    {
       istringstream is(line);
@@ -77,27 +74,30 @@ int main()
       getline(is, couleur, ';');
       getline(is, str, ';');
       taille = stoi(str);
-
-      Personne Leader ={choisir_prenom(ens_prenom),{0,0}}; 
+      Personne* Leader = new Personne (choisir_prenom(ens_prenom),{0,0}); 
       Couleur NewC = Couleur::creer(couleur);
-      Groupe NewG ={Leader, nom, NewC};
+      Groupe* NewG = new Groupe (Leader, nom, NewC);
       for(int i=0;i<taille-1;i++){
-         Personne NewP ={choisir_prenom(ens_prenom),{0,0}};
-         NewG.insertionPers(NewP); 
+         Personne* NewP = new Personne (choisir_prenom(ens_prenom),{0,0});
+         NewG->insertionPers(NewP); 
       }
-      Cort.insertionGrp(NewG);
+      Cort->insertionGrp(NewG);
    }
    fcor.close();
-   Manif fete ={Cort, larg, longu};
-   Cort.afficherCortege();
-   fete.afficherParticipants();
+   Manif* fete = new Manif (Cort, larg, longu);
+   fete->initRoad();
+   fete->afficherParticipants();
+   
    cout << "Etape : " << step << endl;
-   fete.afficherManif();
+   fete->simStep(step);
+   fete->afficherManif();
    step+=1;
-   while(fete.endTest()==false || step == 1){
+   while(fete->endTest()==false){
       cout << "Etape : " << step << endl;
-      fete.simStep(step, advanceGroupe, advancePers);
-      fete.afficherManif();
+      fete->simStep(step);
+      fete->afficherManif();
       step+=1;
-   }  
+   }
+   cout << "Fin de manifestation !" << endl;
+   return 0;
 }

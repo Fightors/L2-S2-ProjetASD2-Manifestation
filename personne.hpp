@@ -17,6 +17,7 @@ class Personne {
     public :
         Personne(std::string s, Position p);
         std::string getName()const;
+        void setName(std::string n);
         int getId()const;
         Position getPos()const;
         int getX()const;

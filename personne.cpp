@@ -29,6 +29,12 @@ string Personne::getName()const{
     return this->name;
 }
 
+/// Redéfinie le nom d ela Personne
+/// @param n Le nouveau nom à implémenter
+void Personne::setName(std::string n){
+    this->name = n;
+}
+
 /// Getter pour l'id d'une Personne
 /// @return int
 int Personne::getId()const{
