@@ -21,6 +21,7 @@ class Manif {
         void initRoad();
         void afficherParticipants() const;
         void simStep(int step);
+        void simStepTwo(int step);
         void extractionID(int id);
         bool endTest()const;
         void afficherManif() const;

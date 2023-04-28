@@ -72,12 +72,17 @@ void Cortege::sortSize() {
     });
 }
 
+
+/// Affiche l'intgralité d'un Cortège
 void Cortege::afficherCortege()const{
     for(auto it = procession.begin(); it !=  procession.end(); it++){
         (*it)->afficherGroupe();
     }
 }
 
+/// On accède à une couleur de Groupe dans le Cortège
+/// @param id l'id de la personne du Groupe
+/// @return Couleur
 Couleur Cortege::getColorGrp(int id)const{
     for(auto it = procession.begin(); it !=  procession.end(); it++){
         if((*it)->findPersId(id)->getId()==id){

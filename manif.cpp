@@ -74,6 +74,28 @@ void Manif::simStep(int step){
     }
 }
 
+/// Simule une étape dans la progression de la manif Deuxième Version Non-Complète !
+/// @param step Le numéro de l'étape à simuler
+void Manif::simStepTwo(int step){
+    if(road[longueur-1][largeur-1]->getName()!="-"){
+        for (int i = longueur - 1; i > 0; i--) {
+            for (int j = 0; j < largeur; j++) {
+                if(i!=longueur-1 && j!=largeur-1){
+                    if(j==largeur-1){
+                        road[i][j]->setY(road[i][j]->getY() + 1);
+                        road[i][j]->setX(0);
+                    }
+                    else{
+                        road[i][j]->setX(road[i][j]->getX()+1);
+                    }
+                }
+            }
+        }
+    }
+    else{
+        simStep(step);
+    }
+}
 
 /// Supprime une Personne de la Manif à partir de son id
 /// @param id L'id de la Personne
