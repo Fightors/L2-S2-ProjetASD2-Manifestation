@@ -90,5 +90,13 @@ void Groupe::extractionID(int id){
     }
 }
 
+void Groupe::afficherGroupe(){
+    cout << grp_name << endl;
+    for(auto it = queueAge.begin(); it !=  queueAge.end(); it++){
+        cout << "Id : " << it->getId() << " Nom : " << it->getName() << endl;
+    }
+    cout << endl;
+}
+
 /// Destructeur de Groupe
 Groupe::~Groupe(){}

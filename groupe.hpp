@@ -25,7 +25,7 @@ class Groupe {
         int getSize()const;
         Personne findPersId(int id);
         std::list<Personne> getQueueAge()const;
-
+        void afficherGroupe();
         void insertionPers(Personne p);
         void extractionPremier();
         void extractionID(int id);

@@ -7,7 +7,7 @@
 class Manif {
     private :
         Cortege* march;
-        std::list<Personne> road;
+        std::list<Personne*> road;
         int largeur;
         int longueur;
         
@@ -18,9 +18,11 @@ class Manif {
         int getLongueur();
         int getLargeur();
 
-        void simStep(int step);
+        void afficherParticipants() const;
+        void simStep(int step, int Gr, int Per);
         void extractionID(int id);
         bool endTest();
+        void afficherManif() const;
         ~Manif();
 };
 
